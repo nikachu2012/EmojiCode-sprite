@@ -67,6 +67,27 @@ emojisp.rotateplus = (id, deg) => {
 }
 
 /**
+ * 回す時の条件を追加します。
+ * @param {String} id 
+ * @param {String} data 
+ */
+emojisp.rotatetype = (id, data) => {
+    switch (data) {
+        case "lr":
+            spriteOption[id].rotateType = "lr";
+            break;
+        case "none":
+            spriteOption[id].rotateType = "none";
+            break;
+        case "free":
+            spriteOption[id].rotateType = "free";
+            break;
+        default:
+            break;
+    }
+}
+
+/**
  * 端に着いたら跳ね返る条件を計算します
  * @param {String} id 
  */
