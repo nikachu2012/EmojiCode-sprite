@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Emojicode-Sprite debug</h1>
+    <div id="sprite"></div>
+    <textarea name="" id="code" cols="30" rows="10"></textarea>
+    <button onclick="eval(document.getElementById('code').value)">run</button>
+    <style>
+        #sprite {
+            width: 480px;
+            height: 360px;
+            border: solid 1px black;
+        }
+    </style>
+    <script src="../emojisprite.js"></script>
+    <script>
+        const option = {
+            firstBackground: '#FFFFFF'
+        }
+        emojisp.create('sprite', option)
+
+        setTimeout(() => {
+            var optiongg = {
+                url: "https://portfolio.nikachu.net/assets/nikachu-full.webp",
+                id: "ban",
+                width: 200,
+                height: 200,
+                x: 0,
+                y: 0,
+                deg: 0,
+                rotateType: "free",
+            }
+
+            emojisp.createSprite(optiongg)
+        }, 100);
+
+    </script>
+
+
+</body>
+
+</html>
