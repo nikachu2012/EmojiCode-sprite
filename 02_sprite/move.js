@@ -30,3 +30,26 @@ emojisp.posxy = (id, x, y) => {
         console.log(error)
     }
 }
+/**
+ * 指定x座標に指定IDのスプライトを移動します。
+ * @param {string} id 
+ * @param {Number} x 
+ */
+emojisp.posx = (id, x) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+
+        if (x < WIDTH) {
+            moveElement.style.left = `${x}px`
+            spriteOption[id].x = x
+        }
+        else {
+            moveElement.style.left = `${WIDTH - 10}px`
+            spriteOption[id].x = WIDTH - 10;
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
