@@ -98,3 +98,25 @@ emojisp.posy = (id, y) => {
         console.log(error)
     }
 }
+/**
+ * 今のy座標に指定分追加で指定IDのスプライトを移動します。
+ * @param {string} id 
+ * @param {Number} plus
+ */
+emojisp.posyplus = (id, plus) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+        if (emojisp.accessSpriteData(id).y + plus < HEIGHT) {
+            moveElement.style.top = `${emojisp.accessSpriteData(id).y + plus}px`
+            spriteOption[id].y = emojisp.accessSpriteData(id).y + plus
+        }
+        else {
+            moveElement.style.top = `${HEIGHT - 10}px`
+            spriteOption[id].y = HEIGHT - 10;
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
