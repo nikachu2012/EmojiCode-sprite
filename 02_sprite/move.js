@@ -53,3 +53,25 @@ emojisp.posx = (id, x) => {
         console.log(error)
     }
 }
+/**
+ * 今のx座標に指定分追加で指定IDのスプライトを移動します。
+ * @param {string} id 
+ * @param {Number} plus
+ */
+emojisp.posxplus = (id, plus) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+        if (emojisp.accessSpriteData(id).x + plus < WIDTH) {
+            moveElement.style.left = `${emojisp.accessSpriteData(id).x + plus}px`
+            spriteOption[id].x = emojisp.accessSpriteData(id).x + plus
+        }
+        else {
+            moveElement.style.left = `${WIDTH - 10}px`
+            spriteOption[id].x = WIDTH - 10;
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
