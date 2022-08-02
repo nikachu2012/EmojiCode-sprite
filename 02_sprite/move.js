@@ -75,3 +75,26 @@ emojisp.posxplus = (id, plus) => {
         console.log(error)
     }
 }
+/**
+ * 指定y座標に指定IDのスプライトを移動します。
+ * @param {string} id 
+ * @param {Number} y
+ */
+emojisp.posy = (id, y) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+
+        if (y < HEIGHT) {
+            moveElement.style.top = `${y}px`
+            spriteOption[id].y = y
+        }
+        else {
+            moveElement.style.top = `${HEIGHT - 10}px`
+            spriteOption[id].y = HEIGHT - 10;
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
