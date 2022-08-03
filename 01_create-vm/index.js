@@ -11,6 +11,8 @@ emojisp.create = (id, option) => {
         WIDTH = writeElement.clientWidth;
         HEIGHT = writeElement.clientHeight;
         
+        FRAME = 30;
+        
         writeElement.style.position = "relative";
         writeElement.style.backgroundColor = option.firstBackground;
         writeElement.style.overflow = `hidden`;
