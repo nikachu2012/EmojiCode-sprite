@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Wed Aug 03 2022 02:19:07 GMT+0900 (日本標準時)
+    Create time: Wed Aug 03 2022 23:38:49 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -15,6 +15,8 @@ emojisp.create = (id, option) => {
 
         WIDTH = writeElement.clientWidth;
         HEIGHT = writeElement.clientHeight;
+        
+        FRAME = 30;
         
         writeElement.style.position = "relative";
         writeElement.style.backgroundColor = option.firstBackground;
@@ -188,6 +190,55 @@ emojisp.posyplus = (id, plus) => {
             moveElement.style.top = `${HEIGHT - 10}px`
             spriteOption[id].y = HEIGHT - 10;
         }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
+
+emojisp.posxytime = (id, x, y, time) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+        const onetime = time / FRAME;
+
+        if (x < WIDTH) {
+            moveX = x - emojisp.accessSpriteData(id).x;
+            finX = x;
+        }
+        else {
+            moveX = WIDTH - 10;
+            finX = WIDTH - 10;
+        }
+
+        if (y < HEIGHT) {
+            moveY = y - emojisp.accessSpriteData(id).y;
+            finY = y;
+        }
+        else {
+            moveY = HEIGHT - 10;
+            finY = WIDTH - 10;
+        }
+
+        i = 0;
+        const loop = setInterval(() => {
+            i++
+            if (i == FRAME) {
+                clearInterval(loop)
+                spriteOption[id].x = finX
+                spriteOption[id].y = finY
+            }
+            else {
+
+                emojisp.posxplus(id, moveX / FRAME)
+
+
+                emojisp.posyplus(id, moveY / FRAME)
+
+
+            }
+
+        }, onetime);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.log(error)
