@@ -125,7 +125,23 @@ emojisp.rotatetype = (id, data) => {
  * @param {String} id 
  */
 emojisp.rebound = (id) => {
-    if(emojisp.accessSpriteData(id).x >= WIDTH - 10){
+    if (emojisp.accessSpriteData(id).x >= WIDTH - 10) {
         emojisp.rotate(id, 180)
     }
 }
+/**
+ * 反転させます。
+ * @param {string} id 
+ */
+emojisp.hanten = (id) => {
+    const hantenElement = document.getElementById(`emojiSprite_${id}`);
+    if (emojisp.accessSpriteData(id).hanten == undefined || emojisp.accessSpriteData(id).hanten == false) {
+        hantenElement.style.transform = `scale(-1,1)`
+        spriteOption[id].hanten = true;
+    }
+    else {
+        hantenElement.style.transform = ``
+        spriteOption[id].hanten = false;
+    }
+}
+
