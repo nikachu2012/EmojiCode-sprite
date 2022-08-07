@@ -62,6 +62,23 @@ emojisp.posx = (id, x) => {
         console.log(error)
     }
 }
+
+emojisp.susumu = (id, kyori) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+
+        if(emojisp.accessSpriteData(id).hanten == true){
+            emojisp.posxplus(id, -(kyori))
+        }
+        else{
+            emojisp.posxplus(id,kyori)
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
 /**
  * 今のx座標に指定分追加で指定IDのスプライトを移動します。
  * @param {string} id 
