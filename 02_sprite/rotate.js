@@ -66,6 +66,39 @@ emojisp.rotateplus = (id, deg) => {
     }
 }
 
+emojisp.rotatetime = (id,deg,time) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+        const style = document.createElement('style')
+
+        const xy =
+            `@keyframes spriteRotate_${id} {
+            0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
+            100% {transform: rotate(${deg}deg);}
+        }`
+
+
+        style.innerHTML = xy;
+        document.getElementsByTagName('head')[0].appendChild(style)
+
+        moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
+
+        spriteOption[id] = deg;
+
+
+        setTimeout(() => {
+            style.remove();
+
+            moveElement.style.transform = `rotate(${deg}deg)`;
+            moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+        }, time);
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
+
 /**
  * 回す時の条件を追加します。
  * @param {String} id 
