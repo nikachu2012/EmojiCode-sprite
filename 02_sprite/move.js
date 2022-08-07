@@ -121,49 +121,56 @@ emojisp.posyplus = (id, plus) => {
     }
 }
 
+/**
+ * 指定時間に座標を動かします。
+ * @param {string} id 
+ * @param {number} x 
+ * @param {number} y 
+ * @param {number} time ms単位
+ */
 emojisp.posxytime = (id, x, y, time) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-        const onetime = time / FRAME;
+        const style = document.createElement('style')
 
         if (x < WIDTH) {
-            moveX = x - emojisp.accessSpriteData(id).x;
-            finX = x;
+            moveX = x;
         }
         else {
             moveX = WIDTH - 10;
-            finX = WIDTH - 10;
         }
 
         if (y < HEIGHT) {
-            moveY = y - emojisp.accessSpriteData(id).y;
-            finY = y;
+            moveY = y;
         }
         else {
             moveY = HEIGHT - 10;
-            finY = WIDTH - 10;
         }
 
-        i = 0;
-        const loop = setInterval(() => {
-            i++
-            if (i == FRAME) {
-                clearInterval(loop)
-                spriteOption[id].x = finX
-                spriteOption[id].y = finY
-            }
-            else {
+        const xy =
+            `@keyframes sprite_${id} {
+            0% {left: ${emojisp.accessSpriteData(id).x}px; top: ${emojisp.accessSpriteData(id).y}px;}
+            100% {left: ${moveX}px; top: ${moveY}px;}
+        }`
 
-                emojisp.posxplus(id, moveX / FRAME)
+        style.innerHTML = xy;
+
+        document.getElementsByTagName('head')[0].appendChild(style)
+
+        moveElement.id = `sprite_${id}`
+        moveElement.style.animation = `sprite_${id} ${time}ms linear`
+
+        spriteOption[id].x = moveX
+        spriteOption[id].y = moveY
 
 
-                emojisp.posyplus(id, moveY / FRAME)
+        setTimeout(() => {
+            style.remove();
 
-
-            }
-
-        }, onetime);
+            moveElement.style.left = `${moveX}px`;
+            moveElement.style.top = `${moveY}px`;
+        }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.log(error)
