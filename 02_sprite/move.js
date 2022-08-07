@@ -8,7 +8,11 @@ emojisp.posxy = (id, x, y) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-        if (x < WIDTH) {
+        if (x < -(emojisp.accessSpriteData(id).width - 10)){
+            moveElement.style.left = `${-(emojisp.accessSpriteData(id).width - 10)}px`
+            spriteOption[id].x = -(emojisp.accessSpriteData(id).width - 10)
+        }
+        else if (x < WIDTH) {
             moveElement.style.left = `${x}px`
             spriteOption[id].x = x
         }
@@ -17,11 +21,16 @@ emojisp.posxy = (id, x, y) => {
             spriteOption[id].x = WIDTH - 10;
 
         }
-
-        if (y < HEIGHT) {
+        
+        if (y < -(emojisp.accessSpriteData(id).height - 10)){
+            moveElement.style.top = `${-(emojisp.accessSpriteData(id).height - 10)}px`
+            spriteOption[id].y = -(emojisp.accessSpriteData(id).height - 10)
+        }
+        else if (y < HEIGHT) {
             moveElement.style.top = `${y}px`
             spriteOption[id].y = y
-        } else {
+        }
+        else {
             moveElement.style.top = `${HEIGHT - 10}px`
             spriteOption[id].y = HEIGHT - 10;
         }
