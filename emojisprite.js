@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Mon Aug 08 2022 03:11:02 GMT+0900 (日本標準時)
+    Create time: Tue Aug 09 2022 01:52:04 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -83,7 +83,11 @@ emojisp.posxy = (id, x, y) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-        if (x < WIDTH) {
+        if (x < -(emojisp.accessSpriteData(id).width - 10)){
+            moveElement.style.left = `${-(emojisp.accessSpriteData(id).width - 10)}px`
+            spriteOption[id].x = -(emojisp.accessSpriteData(id).width - 10)
+        }
+        else if (x < WIDTH) {
             moveElement.style.left = `${x}px`
             spriteOption[id].x = x
         }
@@ -92,11 +96,16 @@ emojisp.posxy = (id, x, y) => {
             spriteOption[id].x = WIDTH - 10;
 
         }
-
-        if (y < HEIGHT) {
+        
+        if (y < -(emojisp.accessSpriteData(id).height - 10)){
+            moveElement.style.top = `${-(emojisp.accessSpriteData(id).height - 10)}px`
+            spriteOption[id].y = -(emojisp.accessSpriteData(id).height - 10)
+        }
+        else if (y < HEIGHT) {
             moveElement.style.top = `${y}px`
             spriteOption[id].y = y
-        } else {
+        }
+        else {
             moveElement.style.top = `${HEIGHT - 10}px`
             spriteOption[id].y = HEIGHT - 10;
         }
@@ -122,6 +131,23 @@ emojisp.posx = (id, x) => {
         else {
             moveElement.style.left = `${WIDTH - 10}px`
             spriteOption[id].x = WIDTH - 10;
+        }
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
+
+emojisp.susumu = (id, kyori) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+
+        if(emojisp.accessSpriteData(id).hanten == true){
+            emojisp.posxplus(id, -(kyori))
+        }
+        else{
+            emojisp.posxplus(id,kyori)
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -319,6 +345,39 @@ emojisp.rotateplus = (id, deg) => {
     }
 }
 
+emojisp.rotatetime = (id,deg,time) => {
+    try {
+        const moveElement = document.getElementById(`emojiSprite_${id}`)
+
+        const style = document.createElement('style')
+
+        const xy =
+            `@keyframes spriteRotate_${id} {
+            0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
+            100% {transform: rotate(${deg}deg);}
+        }`
+
+
+        style.innerHTML = xy;
+        document.getElementsByTagName('head')[0].appendChild(style)
+
+        moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
+
+        spriteOption[id] = deg;
+
+
+        setTimeout(() => {
+            style.remove();
+
+            moveElement.style.transform = `rotate(${deg}deg)`;
+            moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+        }, time);
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.log(error)
+    }
+}
+
 /**
  * 回す時の条件を追加します。
  * @param {String} id 
@@ -345,7 +404,24 @@ emojisp.rotatetype = (id, data) => {
  * @param {String} id 
  */
 emojisp.rebound = (id) => {
-    if(emojisp.accessSpriteData(id).x >= WIDTH - 10){
+    if (emojisp.accessSpriteData(id).x >= WIDTH - 10) {
         emojisp.rotate(id, 180)
     }
-} 
+}
+/**
+ * 反転させます。
+ * @param {string} id 
+ */
+emojisp.hanten = (id) => {
+    const hantenElement = document.getElementById(`emojiSprite_${id}`);
+    if (emojisp.accessSpriteData(id).hanten == undefined || emojisp.accessSpriteData(id).hanten == false) {
+        hantenElement.style.transform = `scale(-1,1)`
+        spriteOption[id].hanten = true;
+    }
+    else {
+        hantenElement.style.transform = ``
+        spriteOption[id].hanten = false;
+    }
+}
+
+ 
