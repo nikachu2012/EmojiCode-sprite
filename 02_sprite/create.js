@@ -21,7 +21,7 @@ emojisp.createSprite = (data) => {
         }
         
         new_element.style.width = `${data.width}px`
-        new_element.style.height = `${data.width}px`
+        new_element.style.height = `${data.height}px`
 
         // 指定した要素の中の末尾に挿入
         writeElement.appendChild(new_element);
