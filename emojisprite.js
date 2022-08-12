@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Aug 12 2022 02:36:35 GMT+0900 (日本標準時)
+    Create time: Fri Aug 12 2022 23:52:56 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -23,7 +23,7 @@ emojisp.create = (id, option) => {
         writeElement.style.overflow = `hidden`;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 } 
 
@@ -36,29 +36,35 @@ let spriteOption = {};
 emojisp.createSprite = (data) => {
     try {
 
-        spriteOption[data.id] = data;
-
-        // 新しいHTML要素を作成
-        let new_element = document.createElement('img');
-
-        new_element.src = data.url;
-        new_element.id = `emojiSprite_${data.id}`
-        new_element.style.position = "absolute";
-        new_element.style.pointerEvents = "none";
-        if(!data.x > WIDTH || !data.y > HEIGHT){
-            new_element.style.top = `${data.y}px`;
-            new_element.style.left = `${data.x}px`;
+        if (Object.keys(spriteOption).includes(data.id)) {
+            alert('すでにスプライトが作成されています。')
+            console.log('Emojicode-Sprite Error: すでにスプライトが作成されています。')
         }
-        
-        new_element.style.width = `${data.width}px`
-        new_element.style.height = `${data.height}px`
+        else {
+            spriteOption[data.id] = data;
 
-        // 指定した要素の中の末尾に挿入
-        writeElement.appendChild(new_element);
+            // 新しいHTML要素を作成
+            let new_element = document.createElement('img');
+
+            new_element.src = data.url;
+            new_element.id = `emojiSprite_${data.id}`
+            new_element.style.position = "absolute";
+            new_element.style.pointerEvents = "none";
+            if (!data.x > WIDTH || !data.y > HEIGHT) {
+                new_element.style.top = `${data.y}px`;
+                new_element.style.left = `${data.x}px`;
+            }
+
+            new_element.style.width = `${data.width}px`
+            new_element.style.height = `${data.height}px`
+
+            // 指定した要素の中の末尾に挿入
+            writeElement.appendChild(new_element);
+        }
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -111,7 +117,7 @@ emojisp.posxy = (id, x, y) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -134,7 +140,7 @@ emojisp.posx = (id, x) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -151,7 +157,7 @@ emojisp.susumu = (id, kyori) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -173,7 +179,7 @@ emojisp.posxplus = (id, plus) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -196,7 +202,7 @@ emojisp.posy = (id, y) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -218,7 +224,7 @@ emojisp.posyplus = (id, plus) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -274,7 +280,7 @@ emojisp.posxytime = (id, x, y, time) => {
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 } 
 /**
@@ -307,7 +313,7 @@ emojisp.rotate = (id, deg) => {
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -341,7 +347,7 @@ emojisp.rotateplus = (id, deg) => {
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -374,7 +380,7 @@ emojisp.rotatetime = (id,deg,time) => {
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
