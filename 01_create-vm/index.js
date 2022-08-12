@@ -18,7 +18,7 @@ emojisp.create = (id, option) => {
         writeElement.style.overflow = `hidden`;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 } 
 

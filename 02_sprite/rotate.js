@@ -28,7 +28,7 @@ emojisp.rotate = (id, deg) => {
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -62,7 +62,7 @@ emojisp.rotateplus = (id, deg) => {
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -95,7 +95,7 @@ emojisp.rotatetime = (id,deg,time) => {
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 

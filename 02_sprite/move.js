@@ -36,7 +36,7 @@ emojisp.posxy = (id, x, y) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -59,7 +59,7 @@ emojisp.posx = (id, x) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -76,7 +76,7 @@ emojisp.susumu = (id, kyori) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -98,7 +98,7 @@ emojisp.posxplus = (id, plus) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -121,7 +121,7 @@ emojisp.posy = (id, y) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 /**
@@ -143,7 +143,7 @@ emojisp.posyplus = (id, plus) => {
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
 
@@ -199,6 +199,6 @@ emojisp.posxytime = (id, x, y, time) => {
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
-        console.log(error)
+        console.error(error)
     }
 }
