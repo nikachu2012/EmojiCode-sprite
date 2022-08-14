@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Aug 12 2022 23:52:56 GMT+0900 (日本標準時)
+    Create time: Sun Aug 14 2022 23:36:20 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -79,6 +79,23 @@ emojisp.accessSpriteData = (id) => {
 }
 
  
+emojisp.deleteSprite = (id) => {
+    try {
+        if (Object.keys(spriteOption).includes(id)) {
+            delete spriteOption[id]
+            document.getElementById(`emojiSprite_${id}`).remove()
+        }
+        else{
+            alert('指定されたスプライトが存在していません。')
+            console.error('EmojiCode Sprite: 指定されたスプライトが存在していません。')
+            return null
+        }
+
+    } catch (error) {
+        alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
+        console.error(error)
+    }
+} 
 /**
  * 指定xy座標に指定IDのスプライトを移動します。
  * @param {string} id 
