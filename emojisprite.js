@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Sun Aug 14 2022 23:36:20 GMT+0900 (日本標準時)
+    Create time: Mon Aug 15 2022 13:30:00 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -27,7 +27,6 @@ emojisp.create = (id, option) => {
     }
 } 
 
- 
 let spriteOption = {};
 /**
  * スプライトを作成します。最後に作成されたフィールドに自動で書き込まれます。
@@ -68,7 +67,6 @@ emojisp.createSprite = (data) => {
     }
 }
 
- 
 /**
  * スプライトの情報を返します。
  * @param {string} id IDの引数です。
@@ -78,7 +76,11 @@ emojisp.accessSpriteData = (id) => {
     return spriteOption[id]
 }
 
- 
+/**
+ * スプライトの削除ができます。
+ * @param {string} id 
+ * @returns 
+ */
 emojisp.deleteSprite = (id) => {
     try {
         if (Object.keys(spriteOption).includes(id)) {
@@ -95,7 +97,25 @@ emojisp.deleteSprite = (id) => {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
     }
-} 
+}
+/**
+ * スプライトのサイズ、画像変更ができます。
+ * @param {string} id 
+ * @param {JSON} option 
+ */
+emojisp.editSprite = (id, option) => {
+    try {
+        spriteOption[id].width = option.width;
+        spriteOption[id].height = option.height;
+        document.getElementById(`emojiSprite_${id}`).style.width = `${option.width}px`;
+        document.getElementById(`emojiSprite_${id}`).style.height = `${option.height}px`;
+
+        spriteOption[id].url = option.url;
+        document.getElementById(`emojiSprite_${id}`).src = option.url
+    } catch (error) {
+
+    }
+}
 /**
  * 指定xy座標に指定IDのスプライトを移動します。
  * @param {string} id 
@@ -299,8 +319,7 @@ emojisp.posxytime = (id, x, y, time) => {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
     }
-} 
-/**
+}/**
  * 指定の角度に変更します。右回転は+,左回転では-をつけてください。
  * @param {string} id 
  * @param {number} deg 
@@ -447,4 +466,3 @@ emojisp.hanten = (id) => {
     }
 }
 
- 
