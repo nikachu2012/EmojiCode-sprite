@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Mon Aug 15 2022 13:30:00 GMT+0900 (日本標準時)
+    Create time: Mon Aug 15 2022 15:03:35 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -49,13 +49,35 @@ emojisp.createSprite = (data) => {
             new_element.id = `emojiSprite_${data.id}`
             new_element.style.position = "absolute";
             new_element.style.pointerEvents = "none";
-            if (!data.x > WIDTH || !data.y > HEIGHT) {
+            if (data.y <= HEIGHT) {
                 new_element.style.top = `${data.y}px`;
-                new_element.style.left = `${data.x}px`;
+            }
+            else {
+                new_element.style.top = `${HEIGHT - 10}px`;
             }
 
-            new_element.style.width = `${data.width}px`
-            new_element.style.height = `${data.height}px`
+            if (data.x <= WIDTH) {
+                new_element.style.left = `${data.x}px`;
+            }
+            else {
+                new_element.style.left = `${WIDTH - 10}px`;
+            }
+
+            if(data.width !== 0){
+                new_element.style.width = `${data.width}px`
+            }
+            else if(data.width == 0){
+                new_element.style.width = undefined
+            }
+
+            if(data.height !== 0){
+                new_element.style.height = `${data.height}px`
+            }
+            else if(data.height == 0){
+                new_element.style.height = undefined
+            }
+            
+            
 
             // 指定した要素の中の末尾に挿入
             writeElement.appendChild(new_element);
