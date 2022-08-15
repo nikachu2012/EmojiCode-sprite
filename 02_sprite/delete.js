@@ -1,3 +1,8 @@
+/**
+ * スプライトの削除ができます。
+ * @param {string} id 
+ * @returns 
+ */
 emojisp.deleteSprite = (id) => {
     try {
         if (Object.keys(spriteOption).includes(id)) {
