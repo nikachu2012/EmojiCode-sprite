@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Mon Aug 15 2022 15:03:35 GMT+0900 (日本標準時)
+    Create time: Mon Aug 15 2022 18:47:58 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -127,10 +127,26 @@ emojisp.deleteSprite = (id) => {
  */
 emojisp.editSprite = (id, option) => {
     try {
-        spriteOption[id].width = option.width;
-        spriteOption[id].height = option.height;
-        document.getElementById(`emojiSprite_${id}`).style.width = `${option.width}px`;
-        document.getElementById(`emojiSprite_${id}`).style.height = `${option.height}px`;
+
+
+
+        if (option.width !== 0) {
+            spriteOption[id].width = option.width;
+            document.getElementById(`emojiSprite_${id}`).style.width = `${option.width}px`;
+        }
+        else if (option.width == 0) {
+            spriteOption[id].width = 0;
+            document.getElementById(`emojiSprite_${id}`).style.width = null;
+        }
+
+        if (option.height !== 0) {
+            spriteOption[id].height = option.height;
+            document.getElementById(`emojiSprite_${id}`).style.height = `${option.height}px`;
+        }
+        else if (option.height == 0) {
+            spriteOption[id].height = 0;
+            document.getElementById(`emojiSprite_${id}`).style.height = null;
+        }
 
         spriteOption[id].url = option.url;
         document.getElementById(`emojiSprite_${id}`).src = option.url
