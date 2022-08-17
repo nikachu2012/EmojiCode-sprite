@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Mon Aug 15 2022 18:47:58 GMT+0900 (日本標準時)
+    Create time: Wed Aug 17 2022 16:10:46 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -340,7 +340,7 @@ emojisp.posxytime = (id, x, y, time) => {
 
         document.getElementsByTagName('head')[0].appendChild(style)
 
-        moveElement.id = `sprite_${id}`
+        /*moveElement.id = `sprite_${id}`*/
         moveElement.style.animation = `sprite_${id} ${time}ms linear`
 
         spriteOption[id].x = moveX
@@ -357,7 +357,8 @@ emojisp.posxytime = (id, x, y, time) => {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
     }
-}/**
+}
+/**
  * 指定の角度に変更します。右回転は+,左回転では-をつけてください。
  * @param {string} id 
  * @param {number} deg 
@@ -425,33 +426,70 @@ emojisp.rotateplus = (id, deg) => {
     }
 }
 
-emojisp.rotatetime = (id,deg,time) => {
+emojisp.rotatetime = (id, deg, time) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
         const style = document.createElement('style')
 
-        const xy =
-            `@keyframes spriteRotate_${id} {
+        switch (emojisp.accessSpriteData(id).rotateType) {
+            case "lr":
+                if (deg == 0 || deg == 180) {
+                    const xy =
+                        `@keyframes spriteRotate_${id} {
             0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
             100% {transform: rotate(${deg}deg);}
         }`
 
 
-        style.innerHTML = xy;
-        document.getElementsByTagName('head')[0].appendChild(style)
+                    style.innerHTML = xy;
+                    document.getElementsByTagName('head')[0].appendChild(style)
 
-        moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
+                    moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
 
-        spriteOption[id] = deg;
+                    spriteOption[id] = deg;
 
 
-        setTimeout(() => {
-            style.remove();
+                    setTimeout(() => {
+                        style.remove();
 
-            moveElement.style.transform = `rotate(${deg}deg)`;
-            moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
-        }, time);
+                        moveElement.style.transform = `rotate(${deg}deg)`;
+                        moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+                    }, time);
+                }
+                break;
+            case "none":
+                break;
+            case "free":
+                const xy =
+                    `@keyframes spriteRotate_${id} {
+            0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
+            100% {transform: rotate(${deg}deg);}
+        }`
+
+
+                style.innerHTML = xy;
+                document.getElementsByTagName('head')[0].appendChild(style)
+
+                moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
+
+                spriteOption[id] = deg;
+
+
+                setTimeout(() => {
+                    style.remove();
+
+                    moveElement.style.transform = `rotate(${deg}deg)`;
+                    moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+                }, time);
+                break;
+
+            default:
+                break;
+        }
+
+
+
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
