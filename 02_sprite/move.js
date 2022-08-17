@@ -184,7 +184,7 @@ emojisp.posxytime = (id, x, y, time) => {
 
         document.getElementsByTagName('head')[0].appendChild(style)
 
-        moveElement.id = `sprite_${id}`
+        /*moveElement.id = `sprite_${id}`*/
         moveElement.style.animation = `sprite_${id} ${time}ms linear`
 
         spriteOption[id].x = moveX
