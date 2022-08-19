@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Wed Aug 17 2022 16:10:46 GMT+0900 (日本標準時)
+    Create time: Fri Aug 19 2022 19:53:28 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -523,7 +523,15 @@ emojisp.rotatetype = (id, data) => {
  */
 emojisp.rebound = (id) => {
     if (emojisp.accessSpriteData(id).x >= WIDTH - 10) {
-        emojisp.rotate(id, 180)
+        if(emojisp.accessSpriteData(id).rebound == false){
+            spriteOption[id].rebound = true;
+            emojisp.rotate(id, 180)
+        }
+        else if (emojisp.accessSpriteData(id).rebound == true){
+            spriteOption[id].rebound = false;
+            emojisp.rotate(id, 0)
+        }
+        
     }
 }
 /**
