@@ -8,32 +8,11 @@ emojisp.posxy = (id, x, y) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-        if (x < -(emojisp.accessSpriteData(id).width - 10)){
-            moveElement.style.left = `${-(emojisp.accessSpriteData(id).width - 10)}px`
-            spriteOption[id].x = -(emojisp.accessSpriteData(id).width - 10)
-        }
-        else if (x < WIDTH) {
-            moveElement.style.left = `${x}px`
-            spriteOption[id].x = x
-        }
-        else {
-            moveElement.style.left = `${WIDTH - 10}px`
-            spriteOption[id].x = WIDTH - 10;
+        moveElement.style.left = `${x}px`
+        spriteOption[id].x = x
 
-        }
-        
-        if (y < -(emojisp.accessSpriteData(id).height - 10)){
-            moveElement.style.top = `${-(emojisp.accessSpriteData(id).height - 10)}px`
-            spriteOption[id].y = -(emojisp.accessSpriteData(id).height - 10)
-        }
-        else if (y < HEIGHT) {
-            moveElement.style.top = `${y}px`
-            spriteOption[id].y = y
-        }
-        else {
-            moveElement.style.top = `${HEIGHT - 10}px`
-            spriteOption[id].y = HEIGHT - 10;
-        }
+        moveElement.style.top = `${y}px`
+        spriteOption[id].y = y
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -47,16 +26,8 @@ emojisp.posxy = (id, x, y) => {
 emojisp.posx = (id, x) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-
-        if (x < WIDTH) {
-            moveElement.style.left = `${x}px`
-            spriteOption[id].x = x
-        }
-        else {
-            moveElement.style.left = `${WIDTH - 10}px`
-            spriteOption[id].x = WIDTH - 10;
-        }
+        moveElement.style.left = `${x}px`
+        spriteOption[id].x = x
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -65,14 +36,11 @@ emojisp.posx = (id, x) => {
 
 emojisp.susumu = (id, kyori) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-
-        if(emojisp.accessSpriteData(id).hanten == true){
+        if (emojisp.accessSpriteData(id).rebound == true) {
             emojisp.posxplus(id, -(kyori))
         }
-        else{
-            emojisp.posxplus(id,kyori)
+        else {
+            emojisp.posxplus(id, kyori)
         }
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -87,15 +55,8 @@ emojisp.susumu = (id, kyori) => {
 emojisp.posxplus = (id, plus) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-        if (emojisp.accessSpriteData(id).x + plus < WIDTH) {
-            moveElement.style.left = `${emojisp.accessSpriteData(id).x + plus}px`
-            spriteOption[id].x = emojisp.accessSpriteData(id).x + plus
-        }
-        else {
-            moveElement.style.left = `${WIDTH - 10}px`
-            spriteOption[id].x = WIDTH - 10;
-        }
+        moveElement.style.left = `${emojisp.accessSpriteData(id).x + plus}px`
+        spriteOption[id].x = emojisp.accessSpriteData(id).x + plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -110,15 +71,8 @@ emojisp.posy = (id, y) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-
-        if (y < HEIGHT) {
-            moveElement.style.top = `${y}px`
-            spriteOption[id].y = y
-        }
-        else {
-            moveElement.style.top = `${HEIGHT - 10}px`
-            spriteOption[id].y = HEIGHT - 10;
-        }
+        moveElement.style.top = `${y}px`
+        spriteOption[id].y = y
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -133,14 +87,9 @@ emojisp.posyplus = (id, plus) => {
     try {
         const moveElement = document.getElementById(`emojiSprite_${id}`)
 
-        if (emojisp.accessSpriteData(id).y + plus < HEIGHT) {
-            moveElement.style.top = `${emojisp.accessSpriteData(id).y + plus}px`
-            spriteOption[id].y = emojisp.accessSpriteData(id).y + plus
-        }
-        else {
-            moveElement.style.top = `${HEIGHT - 10}px`
-            spriteOption[id].y = HEIGHT - 10;
-        }
+        moveElement.style.top = `${emojisp.accessSpriteData(id).y + plus}px`
+        spriteOption[id].y = emojisp.accessSpriteData(id).y + plus
+
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -160,19 +109,8 @@ emojisp.posxytime = (id, x, y, time) => {
 
         const style = document.createElement('style')
 
-        if (x < WIDTH) {
-            moveX = x;
-        }
-        else {
-            moveX = WIDTH - 10;
-        }
-
-        if (y < HEIGHT) {
-            moveY = y;
-        }
-        else {
-            moveY = HEIGHT - 10;
-        }
+        moveX = x;
+        moveY = y;
 
         const xy =
             `@keyframes sprite_${id} {
