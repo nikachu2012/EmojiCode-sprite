@@ -163,7 +163,15 @@ emojisp.rotatetype = (id, data) => {
  */
 emojisp.rebound = (id) => {
     if (emojisp.accessSpriteData(id).x >= WIDTH - 10) {
-        emojisp.rotate(id, 180)
+        if(emojisp.accessSpriteData(id).rebound == false){
+            spriteOption[id].rebound = true;
+            emojisp.rotate(id, 180)
+        }
+        else if (emojisp.accessSpriteData(id).rebound == true){
+            spriteOption[id].rebound = false;
+            emojisp.rotate(id, 0)
+        }
+        
     }
 }
 /**
