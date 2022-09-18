@@ -20,6 +20,14 @@ emojisp.createSprite = (data) => {
             new_element.id = `emojiSprite_${data.id}`
             new_element.style.position = "absolute";
             new_element.style.userSelect = "none";
+
+            if (data.visibility == false) {
+                new_element.style.visibility = 'hidden';
+            }
+            else {
+                new_element.style.visibility = 'visible';
+            }
+
             if (data.y <= HEIGHT) {
                 new_element.style.top = `${data.y}px`;
             }
