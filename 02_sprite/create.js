@@ -50,12 +50,6 @@ emojisp.createSprite = (data) => {
                     
             // 指定した要素の中の末尾に挿入
             writeElement.appendChild(new_element);
-
-            eval(`
-            document.getElementById(\`emojiSprite_${data.id}\`).addEventListener('click', () => {
-                emojisp_click_${data.id}();
-            })
-            `)
         }
 
     } catch (error) {
