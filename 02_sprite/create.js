@@ -42,20 +42,20 @@ emojisp.createSprite = (data) => {
                 new_element.style.left = `${WIDTH - 10}px`;
             }
 
-            if(data.width !== 0){
+            if (data.width !== 0) {
                 new_element.style.width = `${data.width}px`
             }
-            else if(data.width == 0){
+            else if (data.width == 0) {
                 new_element.style.width = undefined
             }
 
-            if(data.height !== 0){
+            if (data.height !== 0) {
                 new_element.style.height = `${data.height}px`
             }
-            else if(data.height == 0){
+            else if (data.height == 0) {
                 new_element.style.height = undefined
             }
-                    
+
             // 指定した要素の中の末尾に挿入
             writeElement.appendChild(new_element);
         }
