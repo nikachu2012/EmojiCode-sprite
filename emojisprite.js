@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Mon Sep 19 2022 02:42:48 GMT+0900 (日本標準時)
+    Create time: Mon Sep 19 2022 03:21:49 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -49,6 +49,14 @@ emojisp.createSprite = (data) => {
             new_element.id = `emojiSprite_${data.id}`
             new_element.style.position = "absolute";
             new_element.style.userSelect = "none";
+
+            if (data.visibility == false) {
+                new_element.style.visibility = 'hidden';
+            }
+            else {
+                new_element.style.visibility = 'visible';
+            }
+
             if (data.y <= HEIGHT) {
                 new_element.style.top = `${data.y}px`;
             }
@@ -63,20 +71,20 @@ emojisp.createSprite = (data) => {
                 new_element.style.left = `${WIDTH - 10}px`;
             }
 
-            if(data.width !== 0){
+            if (data.width !== 0) {
                 new_element.style.width = `${data.width}px`
             }
-            else if(data.width == 0){
+            else if (data.width == 0) {
                 new_element.style.width = undefined
             }
 
-            if(data.height !== 0){
+            if (data.height !== 0) {
                 new_element.style.height = `${data.height}px`
             }
-            else if(data.height == 0){
+            else if (data.height == 0) {
                 new_element.style.height = undefined
             }
-                    
+
             // 指定した要素の中の末尾に挿入
             writeElement.appendChild(new_element);
         }
@@ -486,3 +494,16 @@ emojisp.hanten = (id) => {
     }
 }
 
+emojisp.show = (id) => {
+    const dom = document.getElementById(`emojiSprite_${id}`);
+
+    spriteOption[id].visibility = true;
+    dom.style.visibility = 'visible';
+}
+
+emojisp.hide = (id) => {
+    const dom = document.getElementById(`emojiSprite_${id}`);
+
+    spriteOption[id].visibility = false;
+    dom.style.visibility = 'hidden'
+}
