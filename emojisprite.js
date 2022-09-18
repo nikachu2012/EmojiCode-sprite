@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Aug 19 2022 21:51:12 GMT+0900 (日本標準時)
+    Create time: Sun Sep 18 2022 13:10:16 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 /**
@@ -48,7 +48,7 @@ emojisp.createSprite = (data) => {
             new_element.src = data.url;
             new_element.id = `emojiSprite_${data.id}`
             new_element.style.position = "absolute";
-            new_element.style.pointerEvents = "none";
+            new_element.style.userSelect = "none";
             if (data.y <= HEIGHT) {
                 new_element.style.top = `${data.y}px`;
             }
@@ -76,11 +76,15 @@ emojisp.createSprite = (data) => {
             else if(data.height == 0){
                 new_element.style.height = undefined
             }
-            
-            
-
+                    
             // 指定した要素の中の末尾に挿入
             writeElement.appendChild(new_element);
+
+            eval(`
+            document.getElementById(\`emojiSprite_${data.id}\`).addEventListener('click', () => {
+                emojisp_click_${data.id}();
+            })
+            `)
         }
 
     } catch (error) {
