@@ -10,7 +10,7 @@
 
 <body>
     <h1>Emojicode-Sprite debug</h1>
-    <div id="sprite"></div>
+    <div id="enchant-stage"></div>
     <textarea name="" id="code" cols="30" rows="10"></textarea>
     <button onclick="eval(document.getElementById('code').value)">run</button>
     <style>
@@ -19,27 +19,30 @@
             height: 360px;
             border: solid 1px black;
         }
+
     </style>
-    <script src="../emojisprite.js"></script>
+    <script src="../enchant.js"></script>
+
+
     <script>
-        const option = {
-            firstBackground: '#FFFFFF'
-        }
-        emojisp.create('sprite', option)
+        const emojisp = {};
+        addEventListener('load', () => {
+            enchant();
+
+            emojisp.core = new Game(480, 360)
+            emojisp.core.fps = 60;
+        })
+
 
         setTimeout(() => {
             var optiongg = {
-                url: "https://portfolio.nikachu.net/assets/nikachu-full.webp",
+                url: 'https://en.scratch-wiki.info/w/images/thumb/ScratchCat-Small.png/200px-ScratchCat-Small.png',
+                // url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAABmJLR0QA/wD/AP+gvaeTAAAJZUlEQVR4nO3dfWwbdxkH8O/zu7Od2M7LGoeyMlXTNLaOTUJbN4o0GAwEE6BuvEylTaDaVF4mgUCoTQoDhsfUiiap9lclGExo7dpEZQNRqFTxslJakLZOm2Bt+aOD0Qo1beOkTeLYsX33e/jDsXNO0ibxne348nykSL7z+Xcnf3Nvvud3BwghhBBCCCGEEEIIIYQQQgghlimqSKtH42bbYOQBAtYT+E6GWgXoxorMq04RKAXGBSacAetDiVXp43gwbnk/Hy8xU/uB3kdZ0U4wbvW0bf87B6adibPJXyAe11416lnAK/f2RrSJfQx8zqs2l6nDWoc6Rr70rTEvGvMk4PaDe6Jspf4CYG3JG4aCEQwAhgKR8mJWvsGsAVvDzuYAe9YK+7ph4aOXNndNuJ2P6bYBMBMP9L0IR7hkKhiRMFQo4Lp5vzMA6EwOdjIFng76Xh3AXjA/CiJ2274rsTXRDjCeLAxTIACztQkq4LrpZYNMA6ohBLYs59p8R+TU38+kXv7jaTdtu9tuHo2bYH6mMEiGAbMlAlKVOTj3M1IEszkKMqYjYcIOHI272sq6CrhtMPIAQLcUho2mRgnXBVIEIxqeHsG4NXYx8iE3bbo88uGHC6/IUFBB2ee6pUL5g9IiPf0dl9Weyw+/r/hawvWM4fguCXSnm7ZcrsF043RLchrkGecaTFjlpilXqWhQdHpBZN/rnenvsuQ7LoOsdj4nAfucBOxzErDPScA+JwH7nATscxKwz0nAPuf+gn+V3RiKoD1Ym/q9i9kULmdSNZl3ueou4K+vvgtfXX1XTebd95838Ow7b9Zk3uWSTbTPScA+JwH73DX3wTcc/EkLabWObLwbRFqB/muZ1ltXNnx3tJoLKNyZFXB7/+67mfXTsPAQgGDh0iSDYVjGZOxAz29sRTuvbOw6VeVlFWVwlPAxte3veYZZvw5gPYDgHNM3ALTJ0HgjdqDnaWKWTfwSV1yDY/29z4HoK7OmUARigLmk/joA0FMV6rrmiZ+efwvsqmR8tpOjlxb3AWaAAdSw0tQEgFh/3xNgLoZLRFDhBqjGULEMlm0NPZmFnZqE599cBex8+yTsGi2nzuSgU5PQuanOgoqgggEYkcaSuudqMFt/+Wwr2NpRGEFKwWyNgszSnglkKBiRBqhQANbYBNiyq7qg9cIaT0OnJ0tHaoaezEJP5mA2h6Ea5tr7VYYKNFibAawojDBaIrPCdSLTgNnaBArU3Y9gFWenM7PDLcGwxibyW8EqUcxYXxwIBqAWEBwpQqA1Kp3LZtATaefgIAidTPggE+8EUOzcbSfTsMar85u2CWBNYYAWExgRzJYo7GS6qv+RSxXnbLB27vN5U2JT97GpgVdXDPQcU5peBhAFAJ3OwLI1zJYwUMGutQrAysIAlVG8bkQbEbihGWQu7zMm1iV9fO3Epq6/OkeMbOz+A7P+OIChwjidzSE3PAadzlZsuRQ8uKJEAUO6rpSy5+rXO9y5/TVivh/A2cI41gxrfALZ4VHYqUlwbs6Plm15r3Y1MNTZfRZpvZaAF0resDXsZBq5K2Owk859uR53Mz8JuAYSW7aPD3V0PUbgTwH02sz3nafvCuqwm3lJwDU01NF9JNGxbV0+aLwIx/55yiswG3fM8dEF8+3J7KZVt3vSzt+uXMA7KU9ueHNNQx3dRwAcQTyu2m6P3AfQbUrj3FDH1uNud8i+DXjXmvs9aefbZ45VPOCieFwPA68i/wd0bnPdpGyifU4C9jkJ2OckYJ+TgH1OAvY5354m3XOif2aZUVlGrcpdCKgG3wacyKZrVrJTNvmhw5/a9/d8mkGdIHwSjBjAYAJi/X2v0ME9jwxt+Eay3LYl4BqaCjbOhPuuMcnHYKW/D+B75c5DAq6B2PO7mtCg9jDhy3O9TzR9RUlDfwYScP2IDey+DawPz3ymBZkKRigICgXAOQvWeOGasGpyMz8T+WKwqXKM8vbnOmcBDKig/L9MMcBMMw+Q2vp710Hr3wOIFcaRUlDRRhiOUlqd9a4kWQEoluuzvfiArYk0rCvjy75OekY9mxEb6PuIc8S79vc9RIw/wRGuCgUQWNFcEq7XTAL/i0E3AQDncgBCC/wowxqdgM7kKrZw9YQCBkjRdGUl80Bbf18X23TWUPyIBnfB8QgFFW6AGa38rShMAL8D8Akg3+WCsxZonk0tM8O6Og7OLe+1diYjEoY1XnhQCq0k5r2keNaOz4g0wog0VGWZVC4T2EfAcGGENTbhfPrHLGzbsEbGJNw5qMYgVPh6W0CC2RypWrgAoK4+/p2rzFR8agprjdzIWL6E01Hry1rDnkgjNzJ+3X+A5c6MhmG2REqeOkNEUA1BBNqaq9ovCZg6TUp0bnsu1t+zFkxfAwAw53ssJNMgpfK/6dbZz37fvPn9ni/ym2OXcXzkwrzTqVAQKhSc+s64oj0X5lPc2SY2dj0R6++9CNAP4LjKNKNivyAL0A4wbwFhdRWWc9G6b1k7/0SL9PPzpxYUcBERKvX8z4Wa/tci4kRH94+UUveA8FsAmTmmTwO8X2u6O9Gx7cdMJNvqJW7W4fLljVv/AeCzsed3NXHY/AC0/R6CsolwztbBf3r10ERRHdc8H0ps2T4O4M9VXBZRAVLR4XMSsM9JwD5Xd5d/fnb+FH598d81mfdQNj3/REtM3QU8mJnAYMb1g7GXDdlE+5wE7HMSsM9JwD4nAfucBOxzErDPScA+JwH7nKuAFdjRKaq+SnqWNud3WdM73fFg8aUU4nmmtKiRFlEjNJurgBl0uvDazkoBvFd0tnhraRBw+jqTzsvdGsz6UPG1raWXgwd0JgvYzppzPnTNiRfAVcCJVenjILxdGLaTqRk3xRaLwcywSu40i7MJ8+YTbtp0twY/GLeg8cPCINsa1lhSQi5DvjtQsuRYhoiexIYNrrqQuC/aZab2gb6XmPH5YqOGghENyzMdFkhncrCSqdIDVaJfJTZu/WLt79FBxGpv72bbxGoA9wJTa/JoEjAUjGAAMBSohtX9SxGzzj+LKmvN2OcCYJw0LH7ci1u/e1Z2v3Jvb8Qy8QIBX/CqzeWIgZdMC49d2tzlSdmK5/0qYgd61wPYDeC9Xrftc+eY+anhjq59Xj60oTIdZw4eNGL2uQ9D88MguoOAmxgcrsi86hSBUgz8D8AZgA8lzJtPuD2gEkIIIYQQQgghhBBCCCGEEEIIh/8DHl5LkaAKiGkAAAAASUVORK5CYII=',
                 id: "ban",
-                width: 200,
-                height: 200,
                 x: 0,
                 y: 0,
                 deg: 0,
-                rotateType: "free",
                 rebound: false,
-                hanten: false,
-                visibility: true,
             }
 
             emojisp.createSprite(optiongg)
@@ -47,7 +50,7 @@
 
     </script>
 
-
+    <script src="../emojisprite.js"></script>
 </body>
 
 </html>
