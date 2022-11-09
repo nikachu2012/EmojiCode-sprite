@@ -6,8 +6,9 @@
 emojisp.deleteSprite = (id) => {
     try {
         if (Object.keys(spriteOption).includes(id)) {
-            delete spriteOption[id]
-            document.getElementById(`emojiSprite_${id}`).remove()
+            app.stage.removeChild(spriteOption[id])
+            delete spriteOption[id];
+            delete emojisp.spriteData[id];
         }
         else{
             alert('指定されたスプライトが存在していません。')

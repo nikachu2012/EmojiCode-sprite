@@ -1,4 +1,8 @@
+const emojisp = {};
+
 let spriteOption = {};
+emojisp.spriteData = {};
+
 /**
  * スプライトを作成します。最後に作成されたフィールドに自動で書き込まれます。
  * @param {JSON} data 
@@ -6,58 +10,32 @@ let spriteOption = {};
 emojisp.createSprite = (data) => {
     try {
 
-        if (Object.keys(spriteOption).includes(data.id)) {
+        if (Object.keys(emojisp.spriteData).includes(data.id)) {
             alert('すでにスプライトが作成されています。')
             console.log('Emojicode-Sprite Error: すでにスプライトが作成されています。')
         }
         else {
-            spriteOption[data.id] = data;
+            emojisp.spriteData[data.id] = data;
 
-            // 新しいHTML要素を作成
-            let new_element = document.createElement('img');
+            // スプライトを作成する
+            spriteOption[data.id] = new PIXI.Sprite.from(data.url);
 
-            new_element.src = data.url;
-            new_element.id = `emojiSprite_${data.id}`
-            new_element.style.position = "absolute";
-            new_element.style.userSelect = "none";
+            // 基準をスプライトの中央に指定
+            spriteOption[data.id].anchor.x = 0.5;
+            spriteOption[data.id].anchor.y = 0.5;
 
-            if (data.visibility == false) {
-                new_element.style.visibility = 'hidden';
-            }
-            else {
-                new_element.style.visibility = 'visible';
-            }
+            // 位置を中央にする
+            spriteOption[data.id].x = app.screen.width / 2;
+            spriteOption[data.id].y = app.screen.height / 2;
 
-            if (data.y <= HEIGHT) {
-                new_element.style.top = `${data.y}px`;
-            }
-            else {
-                new_element.style.top = `${HEIGHT - 10}px`;
-            }
+            // 角度の変更
+            spriteOption[data.id].rotation = data.deg * ( Math.PI / 180 );
 
-            if (data.x <= WIDTH) {
-                new_element.style.left = `${data.x}px`;
-            }
-            else {
-                new_element.style.left = `${WIDTH - 10}px`;
-            }
+            // 表示非表示の指定
+            spriteOption[data.id].visible = data.visibility;
 
-            if (data.width !== 0) {
-                new_element.style.width = `${data.width}px`
-            }
-            else if (data.width == 0) {
-                new_element.style.width = undefined
-            }
-
-            if (data.height !== 0) {
-                new_element.style.height = `${data.height}px`
-            }
-            else if (data.height == 0) {
-                new_element.style.height = undefined
-            }
-
-            // 指定した要素の中の末尾に挿入
-            writeElement.appendChild(new_element);
+            // 表示領域に追加する
+            app.stage.addChild(spriteOption[data.id]);
         }
 
     } catch (error) {

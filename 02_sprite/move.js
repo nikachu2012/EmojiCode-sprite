@@ -6,13 +6,10 @@
  */
 emojisp.posxy = (id, x, y) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
+        spriteOption[id].position.set(x, y);
+        emojisp.spriteData[id].x = x;
+        emojisp.spriteData[id].y = y;
 
-        moveElement.style.left = `${x}px`
-        spriteOption[id].x = x
-
-        moveElement.style.top = `${y}px`
-        spriteOption[id].y = y
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -25,18 +22,22 @@ emojisp.posxy = (id, x, y) => {
  */
 emojisp.posx = (id, x) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-        moveElement.style.left = `${x}px`
-        spriteOption[id].x = x
+        spriteOption[id].x = x;
+        emojisp.spriteData[id].x = x;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
     }
 }
 
+/**
+ * 右(反転時は左)に進みます。
+ * @param {String} id 
+ * @param {Number} kyori 
+ */
 emojisp.susumu = (id, kyori) => {
     try {
-        if (emojisp.accessSpriteData(id).rebound == true) {
+        if (emojisp.spriteData[id].hanten == true) {
             emojisp.posxplus(id, -(kyori))
         }
         else {
@@ -54,9 +55,8 @@ emojisp.susumu = (id, kyori) => {
  */
 emojisp.posxplus = (id, plus) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-        moveElement.style.left = `${emojisp.accessSpriteData(id).x + plus}px`
-        spriteOption[id].x = emojisp.accessSpriteData(id).x + plus
+        spriteOption[id].x += plus;
+        emojisp.spriteData[id].x += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -69,10 +69,8 @@ emojisp.posxplus = (id, plus) => {
  */
 emojisp.posy = (id, y) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-        moveElement.style.top = `${y}px`
-        spriteOption[id].y = y
+        spriteOption[id].y = y;
+        emojisp.spriteData[id].y = y;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -85,11 +83,8 @@ emojisp.posy = (id, y) => {
  */
 emojisp.posyplus = (id, plus) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-        moveElement.style.top = `${emojisp.accessSpriteData(id).y + plus}px`
-        spriteOption[id].y = emojisp.accessSpriteData(id).y + plus
-
+        spriteOption[id].y += plus;
+        emojisp.spriteData[id].y += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -105,35 +100,19 @@ emojisp.posyplus = (id, plus) => {
  */
 emojisp.posxytime = (id, x, y, time) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-        const style = document.createElement('style')
-
-        moveX = x;
-        moveY = y;
-
-        const xy =
-            `@keyframes sprite_${id} {
-            0% {left: ${emojisp.accessSpriteData(id).x}px; top: ${emojisp.accessSpriteData(id).y}px;}
-            100% {left: ${moveX}px; top: ${moveY}px;}
-        }`
-
-        style.innerHTML = xy;
-
-        document.getElementsByTagName('head')[0].appendChild(style)
-
-        /*moveElement.id = `sprite_${id}`*/
-        moveElement.style.animation = `sprite_${id} ${time}ms linear`
-
-        spriteOption[id].x = moveX
-        spriteOption[id].y = moveY
-
+        TweenMax.to(spriteOption[id], time / 1000,
+            {
+                pixi: {
+                    x: x,
+                    y: y,
+                },
+                ease: Power0.easeNone,
+            }
+        );
 
         setTimeout(() => {
-            style.remove();
-
-            moveElement.style.left = `${moveX}px`;
-            moveElement.style.top = `${moveY}px`;
+            emojisp.spriteData[id].x = x;
+            emojisp.spriteData[id].y = y;
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')

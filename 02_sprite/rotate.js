@@ -5,26 +5,23 @@
  */
 emojisp.rotate = (id, deg) => {
     try {
-        const rotateElement = document.getElementById(`emojiSprite_${id}`)
-
-        switch (emojisp.accessSpriteData(id).rotateType) {
+        switch (emojisp.spriteData[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    rotateElement.style.transform = `rotate(${deg}deg)`
-                    spriteOption[id].deg = deg
+                    spriteOption[id].rotation = deg * (Math.PI / 180);
+                    emojisp.spriteData[id].deg = deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                rotateElement.style.transform = `rotate(${deg}deg)`
-                spriteOption[id].deg = deg
+                spriteOption[id].rotation = deg * (Math.PI / 180);
+                emojisp.spriteData[id].deg = deg;
                 break;
 
             default:
                 break;
         }
-
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -39,20 +36,18 @@ emojisp.rotate = (id, deg) => {
  */
 emojisp.rotateplus = (id, deg) => {
     try {
-        const rotateElement = document.getElementById(`emojiSprite_${id}`)
-
-        switch (emojisp.accessSpriteData(id).rotateType) {
+        switch (emojisp.spriteData[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    rotateElement.style.transform = `rotate(${emojisp.accessSpriteData(id).deg + deg}deg)`
-                    spriteOption[id].deg = emojisp.accessSpriteData(id).deg + deg;
+                    spriteOption[id].rotation += deg * (Math.PI / 180);
+                    emojisp.spriteData[id].deg += deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                rotateElement.style.transform = `rotate(${emojisp.accessSpriteData(id).deg + deg}deg)`
-                spriteOption[id].deg = emojisp.accessSpriteData(id).deg + deg;
+                spriteOption[id].rotation += deg * (Math.PI / 180);
+                emojisp.spriteData[id].deg += deg;
                 break;
 
             default:
@@ -68,59 +63,37 @@ emojisp.rotateplus = (id, deg) => {
 
 emojisp.rotatetime = (id, deg, time) => {
     try {
-        const moveElement = document.getElementById(`emojiSprite_${id}`)
-
-        const style = document.createElement('style')
-
-        switch (emojisp.accessSpriteData(id).rotateType) {
+        switch (emojisp.spriteData[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    const xy =
-                        `@keyframes spriteRotate_${id} {
-            0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
-            100% {transform: rotate(${deg}deg);}
-        }`
-
-
-                    style.innerHTML = xy;
-                    document.getElementsByTagName('head')[0].appendChild(style)
-
-                    moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
-
-                    spriteOption[id] = deg;
-
+                    TweenMax.to(spriteOption[id], time / 1000,
+                        {
+                            pixi: {
+                                rotation: deg,
+                            },
+                            ease: Power0.easeNone,
+                        }
+                    );
 
                     setTimeout(() => {
-                        style.remove();
-
-                        moveElement.style.transform = `rotate(${deg}deg)`;
-                        moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+                        emojisp.spriteData[id].deg = deg;
                     }, time);
                 }
                 break;
             case "none":
                 break;
             case "free":
-                const xy =
-                    `@keyframes spriteRotate_${id} {
-            0% {transform: rotate(${emojisp.accessSpriteData(id).deg}deg);}
-            100% {transform: rotate(${deg}deg);}
-        }`
-
-
-                style.innerHTML = xy;
-                document.getElementsByTagName('head')[0].appendChild(style)
-
-                moveElement.style.animation = `spriteRotate_${id} ${time}ms linear`
-
-                spriteOption[id] = deg;
-
+                TweenMax.to(spriteOption[id], time / 1000,
+                    {
+                        pixi: {
+                            rotation: deg,
+                        },
+                        ease: Power0.easeNone,
+                    }
+                );
 
                 setTimeout(() => {
-                    style.remove();
-
-                    moveElement.style.transform = `rotate(${deg}deg)`;
-                    moveElement.style.animation.replace(`spriteRotate_${id} ${time}ms linear`, '')
+                    emojisp.spriteData[id].deg = deg;
                 }, time);
                 break;
 
@@ -144,13 +117,13 @@ emojisp.rotatetime = (id, deg, time) => {
 emojisp.rotatetype = (id, data) => {
     switch (data) {
         case "lr":
-            spriteOption[id].rotateType = "lr";
+            emojisp.spriteData[id].rotateType = "lr";
             break;
         case "none":
-            spriteOption[id].rotateType = "none";
+            emojisp.spriteData[id].rotateType = "none";
             break;
         case "free":
-            spriteOption[id].rotateType = "free";
+            emojisp.spriteData[id].rotateType = "free";
             break;
         default:
             break;
@@ -158,35 +131,19 @@ emojisp.rotatetype = (id, data) => {
 }
 
 /**
- * 端に着いたら跳ね返る条件を計算します
- * @param {String} id 
- */
-emojisp.rebound = (id) => {
-    if (emojisp.accessSpriteData(id).x >= WIDTH - 10) {
-        if(emojisp.accessSpriteData(id).rebound == false){
-            spriteOption[id].rebound = true;
-            emojisp.rotate(id, 180)
-        }
-        else if (emojisp.accessSpriteData(id).rebound == true){
-            spriteOption[id].rebound = false;
-            emojisp.rotate(id, 0)
-        }
-        
-    }
-}
-/**
  * 反転させます。
  * @param {string} id 
  */
 emojisp.hanten = (id) => {
-    const hantenElement = document.getElementById(`emojiSprite_${id}`);
-    if (emojisp.accessSpriteData(id).hanten == undefined || emojisp.accessSpriteData(id).hanten == false) {
-        hantenElement.style.transform = `scale(-1,1)`
-        spriteOption[id].hanten = true;
+    if (emojisp.spriteData[id].hanten == undefined || emojisp.spriteData[id].hanten == false) {
+        spriteOption[id].scale.set(-1, 1);
+
+        emojisp.spriteData[id].hanten = true;
     }
     else {
-        hantenElement.style.transform = ``
-        spriteOption[id].hanten = false;
+        spriteOption[id].scale.set(1, 1);
+
+        emojisp.spriteData[id].hanten = false;
     }
 }
 
