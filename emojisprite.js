@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Thu Nov 10 2022 04:54:33 GMT+0000 (Coordinated Universal Time)
+    Create time: Thu Nov 10 2022 05:02:58 GMT+0000 (Coordinated Universal Time)
 */
 const emojisp = {};
 
@@ -49,8 +49,14 @@ emojisp.createSprite = (data) => {
     }
 }
 
- 
 /**
+ * スプライトの情報を返します。
+ * @param {string} id IDの引数です。
+ * @returns {JSON}　データのJSONを返します。
+ */
+ emojisp.accessSpriteData = (id) => {
+    return spriteOption[id]
+}/**
  * スプライトの削除ができます。
  * @param {string} id 
  * @returns 
@@ -73,7 +79,6 @@ emojisp.deleteSprite = (id) => {
         console.error(error)
     }
 }
- 
 /**
  * 指定xy座標に指定IDのスプライトを移動します。
  * @param {string} id 
@@ -195,7 +200,6 @@ emojisp.posxytime = (id, x, y, time) => {
         console.error(error)
     }
 }
- 
 /**
  * 指定の角度に変更します。右回転は+,左回転では-をつけてください。
  * @param {string} id 
@@ -345,7 +349,6 @@ emojisp.hanten = (id) => {
     }
 }
 
- 
 emojisp.show = (id) => {
     const dom = document.getElementById(`emojiSprite_${id}`);
 
@@ -359,4 +362,3 @@ emojisp.hide = (id) => {
     emojisp.spriteData[id].visibility = false;
     dom.style.visibility = 'hidden'
 }
- 
