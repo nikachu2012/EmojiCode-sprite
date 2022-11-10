@@ -6,9 +6,9 @@
  */
 emojisp.posxy = (id, x, y) => {
     try {
-        spriteOption[id].position.set(x, y);
-        emojisp.spriteData[id].x = x;
-        emojisp.spriteData[id].y = y;
+        emojisp.spriteData[id].position.set(x, y);
+        spriteOption[id].x = x;
+        spriteOption[id].y = y;
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -22,8 +22,8 @@ emojisp.posxy = (id, x, y) => {
  */
 emojisp.posx = (id, x) => {
     try {
-        spriteOption[id].x = x;
         emojisp.spriteData[id].x = x;
+        spriteOption[id].x = x;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -37,7 +37,7 @@ emojisp.posx = (id, x) => {
  */
 emojisp.susumu = (id, kyori) => {
     try {
-        if (emojisp.spriteData[id].hanten == true) {
+        if (spriteOption[id].hanten == true) {
             emojisp.posxplus(id, -(kyori))
         }
         else {
@@ -55,8 +55,8 @@ emojisp.susumu = (id, kyori) => {
  */
 emojisp.posxplus = (id, plus) => {
     try {
-        spriteOption[id].x += plus;
-        emojisp.spriteData[id].x += plus
+        emojisp.spriteData[id].x += plus;
+        spriteOption[id].x += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -69,8 +69,8 @@ emojisp.posxplus = (id, plus) => {
  */
 emojisp.posy = (id, y) => {
     try {
-        spriteOption[id].y = y;
         emojisp.spriteData[id].y = y;
+        spriteOption[id].y = y;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -83,8 +83,8 @@ emojisp.posy = (id, y) => {
  */
 emojisp.posyplus = (id, plus) => {
     try {
-        spriteOption[id].y += plus;
-        emojisp.spriteData[id].y += plus
+        emojisp.spriteData[id].y += plus;
+        spriteOption[id].y += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -100,7 +100,7 @@ emojisp.posyplus = (id, plus) => {
  */
 emojisp.posxytime = (id, x, y, time) => {
     try {
-        TweenMax.to(spriteOption[id], time / 1000,
+        TweenMax.to(emojisp.spriteData[id], time / 1000,
             {
                 pixi: {
                     x: x,
@@ -111,8 +111,8 @@ emojisp.posxytime = (id, x, y, time) => {
         );
 
         setTimeout(() => {
-            emojisp.spriteData[id].x = x;
-            emojisp.spriteData[id].y = y;
+            spriteOption[id].x = x;
+            spriteOption[id].y = y;
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')

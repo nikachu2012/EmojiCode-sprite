@@ -5,18 +5,18 @@
  */
 emojisp.rotate = (id, deg) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    spriteOption[id].rotation = deg * (Math.PI / 180);
-                    emojisp.spriteData[id].deg = deg;
+                    emojisp.spriteData[id].rotation = deg * (Math.PI / 180);
+                    spriteOption[id].deg = deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                spriteOption[id].rotation = deg * (Math.PI / 180);
-                emojisp.spriteData[id].deg = deg;
+                emojisp.spriteData[id].rotation = deg * (Math.PI / 180);
+                spriteOption[id].deg = deg;
                 break;
 
             default:
@@ -36,18 +36,18 @@ emojisp.rotate = (id, deg) => {
  */
 emojisp.rotateplus = (id, deg) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    spriteOption[id].rotation += deg * (Math.PI / 180);
-                    emojisp.spriteData[id].deg += deg;
+                    emojisp.spriteData[id].rotation += deg * (Math.PI / 180);
+                    spriteOption[id].deg += deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                spriteOption[id].rotation += deg * (Math.PI / 180);
-                emojisp.spriteData[id].deg += deg;
+                emojisp.spriteData[id].rotation += deg * (Math.PI / 180);
+                spriteOption[id].deg += deg;
                 break;
 
             default:
@@ -63,10 +63,10 @@ emojisp.rotateplus = (id, deg) => {
 
 emojisp.rotatetime = (id, deg, time) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    TweenMax.to(spriteOption[id], time / 1000,
+                    TweenMax.to(emojisp.spriteData[id], time / 1000,
                         {
                             pixi: {
                                 rotation: deg,
@@ -76,14 +76,14 @@ emojisp.rotatetime = (id, deg, time) => {
                     );
 
                     setTimeout(() => {
-                        emojisp.spriteData[id].deg = deg;
+                        spriteOption[id].deg = deg;
                     }, time);
                 }
                 break;
             case "none":
                 break;
             case "free":
-                TweenMax.to(spriteOption[id], time / 1000,
+                TweenMax.to(emojisp.spriteData[id], time / 1000,
                     {
                         pixi: {
                             rotation: deg,
@@ -93,7 +93,7 @@ emojisp.rotatetime = (id, deg, time) => {
                 );
 
                 setTimeout(() => {
-                    emojisp.spriteData[id].deg = deg;
+                    spriteOption[id].deg = deg;
                 }, time);
                 break;
 
@@ -117,13 +117,13 @@ emojisp.rotatetime = (id, deg, time) => {
 emojisp.rotatetype = (id, data) => {
     switch (data) {
         case "lr":
-            emojisp.spriteData[id].rotateType = "lr";
+            spriteOption[id].rotateType = "lr";
             break;
         case "none":
-            emojisp.spriteData[id].rotateType = "none";
+            spriteOption[id].rotateType = "none";
             break;
         case "free":
-            emojisp.spriteData[id].rotateType = "free";
+            spriteOption[id].rotateType = "free";
             break;
         default:
             break;
@@ -135,15 +135,15 @@ emojisp.rotatetype = (id, data) => {
  * @param {string} id 
  */
 emojisp.hanten = (id) => {
-    if (emojisp.spriteData[id].hanten == undefined || emojisp.spriteData[id].hanten == false) {
-        spriteOption[id].scale.set(-1, 1);
+    if (spriteOption[id].hanten == undefined || spriteOption[id].hanten == false) {
+        emojisp.spriteData[id].scale.set(-1, 1);
 
-        emojisp.spriteData[id].hanten = true;
+        spriteOption[id].hanten = true;
     }
     else {
-        spriteOption[id].scale.set(1, 1);
+        emojisp.spriteData[id].scale.set(1, 1);
 
-        emojisp.spriteData[id].hanten = false;
+        spriteOption[id].hanten = false;
     }
 }
 

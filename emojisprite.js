@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Wed Nov 09 2022 10:38:27 GMT+0000 (Coordinated Universal Time)
+    Create time: Thu Nov 10 2022 04:54:33 GMT+0000 (Coordinated Universal Time)
 */
 const emojisp = {};
 
@@ -15,32 +15,32 @@ emojisp.spriteData = {};
 emojisp.createSprite = (data) => {
     try {
 
-        if (Object.keys(emojisp.spriteData).includes(data.id)) {
+        if (Object.keys(spriteOption).includes(data.id)) {
             alert('すでにスプライトが作成されています。')
             console.log('Emojicode-Sprite Error: すでにスプライトが作成されています。')
         }
         else {
-            emojisp.spriteData[data.id] = data;
+            spriteOption[data.id] = data;
 
             // スプライトを作成する
-            spriteOption[data.id] = new PIXI.Sprite.from(data.url);
+            emojisp.spriteData[data.id] = new PIXI.Sprite.from(data.url);
 
             // 基準をスプライトの中央に指定
-            spriteOption[data.id].anchor.x = 0.5;
-            spriteOption[data.id].anchor.y = 0.5;
+            emojisp.spriteData[data.id].anchor.x = 0.5;
+            emojisp.spriteData[data.id].anchor.y = 0.5;
 
             // 位置を中央にする
-            spriteOption[data.id].x = app.screen.width / 2;
-            spriteOption[data.id].y = app.screen.height / 2;
+            emojisp.spriteData[data.id].x = app.screen.width / 2;
+            emojisp.spriteData[data.id].y = app.screen.height / 2;
 
             // 角度の変更
-            spriteOption[data.id].rotation = data.deg * ( Math.PI / 180 );
+            emojisp.spriteData[data.id].rotation = data.deg * ( Math.PI / 180 );
 
             // 表示非表示の指定
-            spriteOption[data.id].visible = data.visibility;
+            emojisp.spriteData[data.id].visible = data.visibility;
 
             // 表示領域に追加する
-            app.stage.addChild(spriteOption[data.id]);
+            app.stage.addChild(emojisp.spriteData[data.id]);
         }
 
     } catch (error) {
@@ -57,10 +57,10 @@ emojisp.createSprite = (data) => {
  */
 emojisp.deleteSprite = (id) => {
     try {
-        if (Object.keys(spriteOption).includes(id)) {
-            app.stage.removeChild(spriteOption[id])
-            delete spriteOption[id];
+        if (Object.keys(emojisp.spriteData).includes(id)) {
+            app.stage.removeChild(emojisp.spriteData[id])
             delete emojisp.spriteData[id];
+            delete spriteOption[id];
         }
         else{
             alert('指定されたスプライトが存在していません。')
@@ -82,9 +82,9 @@ emojisp.deleteSprite = (id) => {
  */
 emojisp.posxy = (id, x, y) => {
     try {
-        spriteOption[id].position.set(x, y);
-        emojisp.spriteData[id].x = x;
-        emojisp.spriteData[id].y = y;
+        emojisp.spriteData[id].position.set(x, y);
+        spriteOption[id].x = x;
+        spriteOption[id].y = y;
 
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -98,8 +98,8 @@ emojisp.posxy = (id, x, y) => {
  */
 emojisp.posx = (id, x) => {
     try {
-        spriteOption[id].x = x;
         emojisp.spriteData[id].x = x;
+        spriteOption[id].x = x;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -113,7 +113,7 @@ emojisp.posx = (id, x) => {
  */
 emojisp.susumu = (id, kyori) => {
     try {
-        if (emojisp.spriteData[id].hanten == true) {
+        if (spriteOption[id].hanten == true) {
             emojisp.posxplus(id, -(kyori))
         }
         else {
@@ -131,8 +131,8 @@ emojisp.susumu = (id, kyori) => {
  */
 emojisp.posxplus = (id, plus) => {
     try {
-        spriteOption[id].x += plus;
-        emojisp.spriteData[id].x += plus
+        emojisp.spriteData[id].x += plus;
+        spriteOption[id].x += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -145,8 +145,8 @@ emojisp.posxplus = (id, plus) => {
  */
 emojisp.posy = (id, y) => {
     try {
-        spriteOption[id].y = y;
         emojisp.spriteData[id].y = y;
+        spriteOption[id].y = y;
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -159,8 +159,8 @@ emojisp.posy = (id, y) => {
  */
 emojisp.posyplus = (id, plus) => {
     try {
-        spriteOption[id].y += plus;
-        emojisp.spriteData[id].y += plus
+        emojisp.spriteData[id].y += plus;
+        spriteOption[id].y += plus
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
         console.error(error)
@@ -176,7 +176,7 @@ emojisp.posyplus = (id, plus) => {
  */
 emojisp.posxytime = (id, x, y, time) => {
     try {
-        TweenMax.to(spriteOption[id], time / 1000,
+        TweenMax.to(emojisp.spriteData[id], time / 1000,
             {
                 pixi: {
                     x: x,
@@ -187,8 +187,8 @@ emojisp.posxytime = (id, x, y, time) => {
         );
 
         setTimeout(() => {
-            emojisp.spriteData[id].x = x;
-            emojisp.spriteData[id].y = y;
+            spriteOption[id].x = x;
+            spriteOption[id].y = y;
         }, time);
     } catch (error) {
         alert('EmojiCode Sprite Controller Error detect!\nPlease see DevTools.')
@@ -203,18 +203,18 @@ emojisp.posxytime = (id, x, y, time) => {
  */
 emojisp.rotate = (id, deg) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    spriteOption[id].rotation = deg * (Math.PI / 180);
-                    emojisp.spriteData[id].deg = deg;
+                    emojisp.spriteData[id].rotation = deg * (Math.PI / 180);
+                    spriteOption[id].deg = deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                spriteOption[id].rotation = deg * (Math.PI / 180);
-                emojisp.spriteData[id].deg = deg;
+                emojisp.spriteData[id].rotation = deg * (Math.PI / 180);
+                spriteOption[id].deg = deg;
                 break;
 
             default:
@@ -234,18 +234,18 @@ emojisp.rotate = (id, deg) => {
  */
 emojisp.rotateplus = (id, deg) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    spriteOption[id].rotation += deg * (Math.PI / 180);
-                    emojisp.spriteData[id].deg += deg;
+                    emojisp.spriteData[id].rotation += deg * (Math.PI / 180);
+                    spriteOption[id].deg += deg;
                 }
                 break;
             case "none":
                 break;
             case "free":
-                spriteOption[id].rotation += deg * (Math.PI / 180);
-                emojisp.spriteData[id].deg += deg;
+                emojisp.spriteData[id].rotation += deg * (Math.PI / 180);
+                spriteOption[id].deg += deg;
                 break;
 
             default:
@@ -261,10 +261,10 @@ emojisp.rotateplus = (id, deg) => {
 
 emojisp.rotatetime = (id, deg, time) => {
     try {
-        switch (emojisp.spriteData[id].rotateType) {
+        switch (spriteOption[id].rotateType) {
             case "lr":
                 if (deg == 0 || deg == 180) {
-                    TweenMax.to(spriteOption[id], time / 1000,
+                    TweenMax.to(emojisp.spriteData[id], time / 1000,
                         {
                             pixi: {
                                 rotation: deg,
@@ -274,14 +274,14 @@ emojisp.rotatetime = (id, deg, time) => {
                     );
 
                     setTimeout(() => {
-                        emojisp.spriteData[id].deg = deg;
+                        spriteOption[id].deg = deg;
                     }, time);
                 }
                 break;
             case "none":
                 break;
             case "free":
-                TweenMax.to(spriteOption[id], time / 1000,
+                TweenMax.to(emojisp.spriteData[id], time / 1000,
                     {
                         pixi: {
                             rotation: deg,
@@ -291,7 +291,7 @@ emojisp.rotatetime = (id, deg, time) => {
                 );
 
                 setTimeout(() => {
-                    emojisp.spriteData[id].deg = deg;
+                    spriteOption[id].deg = deg;
                 }, time);
                 break;
 
@@ -315,13 +315,13 @@ emojisp.rotatetime = (id, deg, time) => {
 emojisp.rotatetype = (id, data) => {
     switch (data) {
         case "lr":
-            emojisp.spriteData[id].rotateType = "lr";
+            spriteOption[id].rotateType = "lr";
             break;
         case "none":
-            emojisp.spriteData[id].rotateType = "none";
+            spriteOption[id].rotateType = "none";
             break;
         case "free":
-            emojisp.spriteData[id].rotateType = "free";
+            spriteOption[id].rotateType = "free";
             break;
         default:
             break;
@@ -333,15 +333,15 @@ emojisp.rotatetype = (id, data) => {
  * @param {string} id 
  */
 emojisp.hanten = (id) => {
-    if (emojisp.spriteData[id].hanten == undefined || emojisp.spriteData[id].hanten == false) {
-        spriteOption[id].scale.set(-1, 1);
+    if (spriteOption[id].hanten == undefined || spriteOption[id].hanten == false) {
+        emojisp.spriteData[id].scale.set(-1, 1);
 
-        emojisp.spriteData[id].hanten = true;
+        spriteOption[id].hanten = true;
     }
     else {
-        spriteOption[id].scale.set(1, 1);
+        emojisp.spriteData[id].scale.set(1, 1);
 
-        emojisp.spriteData[id].hanten = false;
+        spriteOption[id].hanten = false;
     }
 }
 
@@ -349,14 +349,14 @@ emojisp.hanten = (id) => {
 emojisp.show = (id) => {
     const dom = document.getElementById(`emojiSprite_${id}`);
 
-    spriteOption[id].visibility = true;
+    emojisp.spriteData[id].visibility = true;
     dom.style.visibility = 'visible';
 }
 
 emojisp.hide = (id) => {
     const dom = document.getElementById(`emojiSprite_${id}`);
 
-    spriteOption[id].visibility = false;
+    emojisp.spriteData[id].visibility = false;
     dom.style.visibility = 'hidden'
 }
  
