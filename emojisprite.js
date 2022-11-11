@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Nov 11 2022 06:06:55 GMT+0000 (Coordinated Universal Time)
+    Create time: Fri Nov 11 2022 06:25:15 GMT+0000 (Coordinated Universal Time)
 */
 const emojisp = {};
 
@@ -349,16 +349,20 @@ emojisp.hanten = (id) => {
     }
 }
 
+/**
+ * スプライトを表示します。
+ * @param {String} id 
+ */
 emojisp.show = (id) => {
-    const dom = document.getElementById(`emojiSprite_${id}`);
-
-    emojisp.spriteData[id].visibility = true;
-    dom.style.visibility = 'visible';
+    spriteOption[id].visibility = true;
+    emojisp.spriteData[id].visible = true;
 }
 
+/**
+ * スプライトを非表示にします。
+ * @param {String} id 
+ */
 emojisp.hide = (id) => {
-    const dom = document.getElementById(`emojiSprite_${id}`);
-
-    emojisp.spriteData[id].visibility = false;
-    dom.style.visibility = 'hidden'
+    emojisp.spriteData[id].visible = false;
+    spriteOption[id].visibility = false;
 }
