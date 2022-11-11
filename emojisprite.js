@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Nov 11 2022 06:25:15 GMT+0000 (Coordinated Universal Time)
+    Create time: Fri Nov 11 2022 17:41:47 GMT+0000 (Coordinated Universal Time)
 */
 const emojisp = {};
 
@@ -38,6 +38,9 @@ emojisp.createSprite = (data) => {
 
             // 表示非表示の指定
             emojisp.spriteData[data.id].visible = data.visibility;
+
+            // イベント系の有効化
+            emojisp.spriteData[data.id].interactive = true;
 
             // 表示領域に追加する
             app.stage.addChild(emojisp.spriteData[data.id]);
