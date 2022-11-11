@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Thu Nov 10 2022 05:02:58 GMT+0000 (Coordinated Universal Time)
+    Create time: Fri Nov 11 2022 06:06:55 GMT+0000 (Coordinated Universal Time)
 */
 const emojisp = {};
 
@@ -30,8 +30,8 @@ emojisp.createSprite = (data) => {
             emojisp.spriteData[data.id].anchor.y = 0.5;
 
             // 位置を中央にする
-            emojisp.spriteData[data.id].x = app.screen.width / 2;
-            emojisp.spriteData[data.id].y = app.screen.height / 2;
+            emojisp.spriteData[data.id].x = data.x;
+            emojisp.spriteData[data.id].y = data.y;
 
             // 角度の変更
             emojisp.spriteData[data.id].rotation = data.deg * ( Math.PI / 180 );
