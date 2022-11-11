@@ -1,13 +1,17 @@
+/**
+ * スプライトを表示します。
+ * @param {String} id 
+ */
 emojisp.show = (id) => {
-    const dom = document.getElementById(`emojiSprite_${id}`);
-
-    emojisp.spriteData[id].visibility = true;
-    dom.style.visibility = 'visible';
+    spriteOption[id].visibility = true;
+    emojisp.spriteData[id].visible = true;
 }
 
+/**
+ * スプライトを非表示にします。
+ * @param {String} id 
+ */
 emojisp.hide = (id) => {
-    const dom = document.getElementById(`emojiSprite_${id}`);
-
-    emojisp.spriteData[id].visibility = false;
-    dom.style.visibility = 'hidden'
+    emojisp.spriteData[id].visible = false;
+    spriteOption[id].visibility = false;
 }
