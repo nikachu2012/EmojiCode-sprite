@@ -34,6 +34,9 @@ emojisp.createSprite = (data) => {
             // 表示非表示の指定
             emojisp.spriteData[data.id].visible = data.visibility;
 
+            // イベント系の有効化
+            emojisp.spriteData[data.id].interactive = true;
+
             // 表示領域に追加する
             app.stage.addChild(emojisp.spriteData[data.id]);
         }
