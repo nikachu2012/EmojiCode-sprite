@@ -1,7 +1,7 @@
 /* 
     EmojiCode Sprite Controller
     Created by nikachu2012(https://github.com/nikachu2012)
-    Create time: Fri Nov 11 2022 17:41:47 GMT+0000 (Coordinated Universal Time)
+    Create time: Sun Nov 13 2022 01:00:09 GMT+0900 (日本標準時)
 */
 const emojisp = {};
 
@@ -52,6 +52,9 @@ emojisp.createSprite = (data) => {
     }
 }
 
+ 
+emojisp.collision=(t,e)=>{let h,i,a,r,l,n=emojisp.spriteData[t],c=emojisp.spriteData[e];return h=!1,n.centerX=n.x+n.width/2,n.centerY=n.y+n.height/2,c.centerX=c.x+c.width/2,c.centerY=c.y+c.height/2,n.halfWidth=n.width/2,n.halfHeight=n.height/2,c.halfWidth=c.width/2,c.halfHeight=c.height/2,r=n.centerX-c.centerX,l=n.centerY-c.centerY,i=n.halfWidth+c.halfWidth,a=n.halfHeight+c.halfHeight,h=Math.abs(r)<i&&Math.abs(l)<a,h};
+ 
 /**
  * スプライトの情報を返します。
  * @param {string} id IDの引数です。
@@ -59,7 +62,8 @@ emojisp.createSprite = (data) => {
  */
  emojisp.accessSpriteData = (id) => {
     return spriteOption[id]
-}/**
+} 
+/**
  * スプライトの削除ができます。
  * @param {string} id 
  * @returns 
@@ -82,6 +86,7 @@ emojisp.deleteSprite = (id) => {
         console.error(error)
     }
 }
+ 
 /**
  * 指定xy座標に指定IDのスプライトを移動します。
  * @param {string} id 
@@ -203,6 +208,7 @@ emojisp.posxytime = (id, x, y, time) => {
         console.error(error)
     }
 }
+ 
 /**
  * 指定の角度に変更します。右回転は+,左回転では-をつけてください。
  * @param {string} id 
@@ -352,6 +358,7 @@ emojisp.hanten = (id) => {
     }
 }
 
+ 
 /**
  * スプライトを表示します。
  * @param {String} id 
@@ -369,3 +376,4 @@ emojisp.hide = (id) => {
     emojisp.spriteData[id].visible = false;
     spriteOption[id].visibility = false;
 }
+ 
