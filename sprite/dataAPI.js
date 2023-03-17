@@ -3,7 +3,6 @@
  * @param {string} id IDの引数です。
  * @returns {JSON}　データのJSONを返します。
  */
-emojisp.accessSpriteData = (id) => {
+ emojisp.accessSpriteData = (id) => {
     return spriteOption[id]
 }
-
